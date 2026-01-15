@@ -1,0 +1,26 @@
+{
+    "ast-grep-marketplace": {
+        "source": {
+            "source": "github",
+            "repo": "ast-grep/claude-skill"
+        },
+        "installLocation": "~/.claude/plugins/marketplaces/ast-grep-marketplace",
+        "lastUpdated": "2026-01-15T02:52:19.186Z"
+    },
+    "superpowers-marketplace": {
+        "source": {
+            "source": "github",
+            "repo": "obra/superpowers-marketplace"
+        },
+        "installLocation": "~/.claude/plugins/marketplaces/superpowers-marketplace",
+        "lastUpdated": "2026-01-12T07:11:01.491Z"
+    },
+    "claude-plugins-official": {
+        "source": {
+            "source": "github",
+            "repo": "anthropics/claude-plugins-official"
+        },
+        "installLocation": "~/.claude/plugins/marketplaces/claude-plugins-official",
+        "lastUpdated": "2026-01-15T06:18:14.306Z"
+    }
+}

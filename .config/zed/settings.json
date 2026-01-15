@@ -1,0 +1,49 @@
+{
+    "agent": {
+        "default_model": {
+            "provider": "openrouter",
+            "model": "x-ai/grok-code-fast-1"
+        },
+        "model_parameters": []
+    },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "icon_theme": "Catppuccin Frappé",
+    "base_keymap": "VSCode",
+    "ui_font_size": 16,
+    "buffer_font_size": 15,
+    "theme": {
+        "mode": "system",
+        "light": "Ayu Light",
+        "dark": "Github Dark"
+    },
+    "scroll_beyond_last_line": "off",
+    "project_panel": {
+        "auto_fold_dirs": false,
+        "sort_mode": "files_first"
+    },
+    "auto_install_extensions": {
+        "astro": true,
+        "biome": true,
+        "catppuccin": true,
+        "dockerfile": true,
+        "fish": true,
+        "git-firefly": true,
+        "github-theme": true,
+        "gosum": true,
+        "html": true,
+        "lua": true,
+        "make": true,
+        "opencode": true,
+        "powershell": true,
+        "proto": true,
+        "rainbow-csv": true,
+        "sql": true,
+        "svelte": true,
+        "terraform": true,
+        "toml": true,
+        "xml": true
+    }
+}
