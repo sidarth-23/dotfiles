@@ -18,7 +18,7 @@ This repository contains my personal development environment configurations:
 - Neovim (>= 0.9.0)
 - WezTerm
 - Zed Editor
-- Claude Code CLI
+- Task (go-task)
 - Git
 - Homebrew (for Linux)
 - Volta (Node.js version manager)
@@ -49,17 +49,30 @@ This repository contains my personal development environment configurations:
    ln -s ~/.dotfiles/.claude ~/.claude
    ```
 
-3. Install Homebrew (Linux):
+3. Install Claude Code and plugins:
+   ```bash
+   # Full setup (install Claude Code + marketplaces + plugins)
+   task cc:setup
+
+   # Or install individually:
+   task cc:install        # Install Claude Code CLI only
+   task cc:marketplaces   # Install marketplaces only
+   task cc:plugins        # Install plugins only
+   ```
+
+   **Note:** Due to a Claude bug with `~` paths in plugin configuration files, plugins must be installed via CLI commands rather than copying plugin JSON files.
+
+4. Install Homebrew (Linux):
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-4. Install Volta:
+5. Install Volta:
    ```bash
    curl https://get.volta.sh | bash
    ```
 
-5. Install Rust:
+6. Install Rust:
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
@@ -95,8 +108,9 @@ This repository contains my personal development environment configurations:
 ### Claude Code
 - **Hooks**: Git safety, commit validation, file protection, package manager enforcement, lint checks
 - **Agents**: Refactoring, documentation, error handling, workflow orchestration, multi-agent coordination
-- **Plugins**: LSP integrations (Go, TypeScript, Rust), superpowers, commit-commands
+- **Plugins**: LSP integrations (Go, TypeScript, Rust), superpowers, commit-commands, context7, frontend-design
 - **Status Line**: Custom visual feedback via ccstatusline
+- **Installation**: Automated via Taskfile (`task cc:setup`)
 
 ## Updating
 

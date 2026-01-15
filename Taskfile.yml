@@ -1,0 +1,37 @@
+version: '3'
+
+tasks:
+  cc:install:
+    desc: Install Claude Code CLI (native installer)
+    cmds:
+      - |
+        case "$(uname -s)" in
+          Linux*)  curl -fsSL https://claude.ai/install.sh | sh ;;
+          Darwin*) curl -fsSL https://claude.ai/install.sh | sh ;;
+          *)       echo "Unsupported OS"; exit 1 ;;
+        esac
+
+  cc:marketplaces:
+    desc: Install Claude Code marketplaces
+    cmds:
+      - claude /install-marketplace anthropics/claude-plugins-official
+      - claude /install-marketplace obra/superpowers-marketplace
+      - claude /install-marketplace ast-grep/claude-skill
+
+  cc:plugins:
+    desc: Install Claude Code plugins
+    deps: [cc:marketplaces]
+    cmds:
+      - claude /install-plugin superpowers@superpowers-marketplace
+      - claude /install-plugin commit-commands@claude-plugins-official
+      - claude /install-plugin gopls-lsp@claude-plugins-official
+      - claude /install-plugin context7@claude-plugins-official
+      - claude /install-plugin frontend-design@claude-plugins-official
+      - claude /install-plugin typescript-lsp@claude-plugins-official
+      - claude /install-plugin rust-analyzer-lsp@claude-plugins-official
+
+  cc:setup:
+    desc: Full Claude Code setup (install + marketplaces + plugins)
+    cmds:
+      - task: cc:install
+      - task: cc:plugins

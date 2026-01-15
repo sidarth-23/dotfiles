@@ -1,7 +1,8 @@
 {
     "env": {
         "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-5-20250929",
-        "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-5-20251101"
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-5-20251101",
+        "ENABLE_TOOL_SEARCH": true
     },
     "model": "opusplan",
     "hooks": {
@@ -27,7 +28,7 @@
                     },
                     {
                         "type": "command",
-                        "command": "python3 ~/.claude/hooks/js-package_manager_detection.py"
+                        "command": "python3 ~/.claude/hooks/js_package_manager_detection.py"
                     }
                 ]
             },
