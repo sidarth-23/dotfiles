@@ -4,7 +4,7 @@
         "superpowers@superpowers-marketplace": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/superpowers-marketplace/superpowers/3.6.2",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/superpowers-marketplace/superpowers/3.6.2",
                 "version": "3.6.2",
                 "installedAt": "2025-12-16T18:45:09.110Z",
                 "lastUpdated": "2025-12-16T18:45:09.110Z",
@@ -14,7 +14,7 @@
         "commit-commands@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/commit-commands/ee2f72662645",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/commit-commands/ee2f72662645",
                 "version": "ee2f72662645",
                 "installedAt": "2025-12-17T16:04:17.788Z",
                 "lastUpdated": "2026-01-15T02:16:43.754Z"
@@ -23,7 +23,7 @@
         "gopls-lsp@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/gopls-lsp/1.0.0",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/gopls-lsp/1.0.0",
                 "version": "1.0.0",
                 "installedAt": "2025-12-26T12:27:06.335Z",
                 "lastUpdated": "2025-12-26T12:27:06.335Z"
@@ -32,7 +32,7 @@
         "context7@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/context7/ee2f72662645",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/context7/ee2f72662645",
                 "version": "ee2f72662645",
                 "installedAt": "2026-01-15T02:46:50.211Z",
                 "lastUpdated": "2026-01-15T02:46:50.211Z",
@@ -42,7 +42,7 @@
         "frontend-design@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/frontend-design/ee2f72662645",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/frontend-design/ee2f72662645",
                 "version": "ee2f72662645",
                 "installedAt": "2026-01-15T02:49:16.994Z",
                 "lastUpdated": "2026-01-15T02:49:16.994Z",
@@ -52,7 +52,7 @@
         "typescript-lsp@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
                 "version": "1.0.0",
                 "installedAt": "2026-01-15T05:07:32.532Z",
                 "lastUpdated": "2026-01-15T05:07:32.532Z",
@@ -62,7 +62,7 @@
         "rust-analyzer-lsp@claude-plugins-official": [
             {
                 "scope": "user",
-                "installPath": "~/.claude/plugins/cache/claude-plugins-official/rust-analyzer-lsp/1.0.0",
+                "installPath": "<ABSOLUTE_PATH_ENTRY>/.claude/plugins/cache/claude-plugins-official/rust-analyzer-lsp/1.0.0",
                 "version": "1.0.0",
                 "installedAt": "2026-01-15T05:07:45.700Z",
                 "lastUpdated": "2026-01-15T05:07:45.700Z",
