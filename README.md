@@ -1,6 +1,6 @@
 # Dotfiles
 
-My personal dotfiles for Fish shell, Neovim, WezTerm, and Zed editor configurations.
+My personal dotfiles for Fish shell, Neovim, WezTerm, Zed, and Claude Code configurations.
 
 ## Overview
 
@@ -10,6 +10,7 @@ This repository contains my personal development environment configurations:
 - **Neovim**: LazyVim-based setup with extensive language support and development tools
 - **WezTerm**: Modern terminal emulator with dynamic theme switching
 - **Zed**: Lightweight editor configuration
+- **Claude Code**: AI coding assistant with custom hooks, agents, and plugins
 
 ## Prerequisites
 
@@ -17,6 +18,7 @@ This repository contains my personal development environment configurations:
 - Neovim (>= 0.9.0)
 - WezTerm
 - Zed Editor
+- Claude Code CLI
 - Git
 - Homebrew (for Linux)
 - Volta (Node.js version manager)
@@ -42,6 +44,9 @@ This repository contains my personal development environment configurations:
 
    # Zed
    ln -s ~/.dotfiles/zed ~/.config/zed
+
+   # Claude Code
+   ln -s ~/.dotfiles/.claude ~/.claude
    ```
 
 3. Install Homebrew (Linux):
@@ -87,6 +92,12 @@ This repository contains my personal development environment configurations:
 - Custom font sizes
 - GitHub Dark Default theme
 
+### Claude Code
+- **Hooks**: Git safety, commit validation, file protection, package manager enforcement, lint checks
+- **Agents**: Refactoring, documentation, error handling, workflow orchestration, multi-agent coordination
+- **Plugins**: LSP integrations (Go, TypeScript, Rust), superpowers, commit-commands
+- **Status Line**: Custom visual feedback via ccstatusline
+
 ## Updating
 
 1. Pull the latest changes:
@@ -108,6 +119,7 @@ Each tool's configuration can be customized by editing the respective configurat
 - Neovim: `~/.config/nvim/lua/config/*.lua`
 - WezTerm: `~/.config/wezterm/wezterm.lua`
 - Zed: `~/.config/zed/settings.json`
+- Claude Code: `~/.claude/settings.json`, `~/.claude/hooks/`, `~/.claude/agents/`
 
 ## License
 
