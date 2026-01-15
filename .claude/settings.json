@@ -1,0 +1,70 @@
+{
+    "env": {
+        "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-5-20250929",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-5-20251101"
+    },
+    "model": "opusplan",
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Bash",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/clean_commit_message.py"
+                    },
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/git_safety_checks.py"
+                    },
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/docker_validator.py"
+                    },
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/file_naming_convention.py"
+                    },
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/js-package_manager_detection.py"
+                    }
+                ]
+            },
+            {
+                "matcher": "Write|Edit|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/dangerous_file_edit.py"
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write|Edit|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 ~/.claude/hooks/js_lint_check.py"
+                    }
+                ]
+            }
+        ]
+    },
+    "statusLine": {
+        "type": "command",
+        "command": "npx -y ccstatusline@latest",
+        "padding": 0
+    },
+    "enabledPlugins": {
+        "superpowers@superpowers-marketplace": true,
+        "commit-commands@claude-plugins-official": true,
+        "gopls-lsp@claude-plugins-official": true,
+        "context7@claude-plugins-official": true,
+        "frontend-design@claude-plugins-official": true,
+        "typescript-lsp@claude-plugins-official": true,
+        "rust-analyzer-lsp@claude-plugins-official": true
+    }
+}
