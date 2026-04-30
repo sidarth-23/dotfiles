@@ -16,9 +16,8 @@ local function scheme_for_appearance(appearance)
     return 'Github'
   end
 end
- 
+
  -- Appearance
-config.window_background_opacity = 0.95
 config.window_decorations = "RESIZE"
 config.color_scheme = scheme_for_appearance(get_appearance())
 config.default_cursor_style = 'BlinkingBar'
@@ -30,7 +29,4 @@ config.max_fps = 120
 -- Tabs
 config.show_tab_index_in_tab_bar = false
 
--- Spawn a fish shell in login mode
-config.default_prog = { '/usr/bin/fish', '-l' }
- 
 return config

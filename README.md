@@ -1,20 +1,20 @@
 # Dotfiles
 
-My personal dotfiles for Fish shell, Neovim, WezTerm, Zed, and Claude Code configurations.
+My personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) for Neovim, WezTerm, Zed, Claude Code, and other tools.
 
 ## Overview
 
 This repository contains my personal development environment configurations:
 
-- **Fish Shell**: Custom shell configuration with Volta, Homebrew, and Rust integration
 - **Neovim**: LazyVim-based setup with extensive language support and development tools
 - **WezTerm**: Modern terminal emulator with dynamic theme switching
 - **Zed**: Lightweight editor configuration
 - **Claude Code**: AI coding assistant with custom hooks, agents, and plugins
+- **.agents**: AI agent skills for various engineering workflows
 
 ## Prerequisites
 
-- Fish Shell
+- [chezmoi](https://www.chezmoi.io/install/)
 - Neovim (>= 0.9.0)
 - WezTerm
 - Zed Editor
@@ -26,63 +26,64 @@ This repository contains my personal development environment configurations:
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
-   ```
+### 1. Install chezmoi
 
-2. Create symbolic links:
-   ```bash
-   # Fish
-   ln -s ~/.dotfiles/fish ~/.config/fish
+```bash
+# macOS / Linux
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
 
-   # Neovim
-   ln -s ~/.dotfiles/nvim ~/.config/nvim
+# Or via Homebrew
+brew install chezmoi
+```
 
-   # WezTerm
-   ln -s ~/.dotfiles/wezterm ~/.config/wezterm
+### 2. Initialize chezmoi with this repo
 
-   # Zed
-   ln -s ~/.dotfiles/zed ~/.config/zed
+```bash
+chezmoi init --apply https://github.com/sidarth-23/dotfiles.git
+```
 
-   # Claude Code
-   ln -s ~/.dotfiles/.claude ~/.claude
-   ```
+This will clone the repo into `~/.local/share/chezmoi` and immediately apply all dotfiles to your home directory.
 
-3. Install Claude Code and plugins:
-   ```bash
-   # Full setup (install Claude Code + marketplaces + plugins)
-   task cc:setup
+### 3. Install Claude Code and plugins
 
-   # Or install individually:
-   task cc:install        # Install Claude Code CLI only
-   task cc:marketplaces   # Install marketplaces only
-   task cc:plugins        # Install plugins only
-   ```
+```bash
+# Full setup (install Claude Code + marketplaces + plugins)
+task cc:setup
 
-   **Note:** Due to a Claude bug with `~` paths in plugin configuration files, plugins must be installed via CLI commands rather than copying plugin JSON files.
+# Or install individually:
+task cc:install        # Install Claude Code CLI only
+task cc:marketplaces   # Install marketplaces only
+task cc:plugins        # Install plugins only
+```
 
-4. Install Homebrew (Linux):
-   ```bash
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   ```
+**Note:** Due to a Claude bug with `~` paths in plugin configuration files, plugins must be installed via CLI commands rather than copying plugin JSON files.
 
-5. Install Volta:
-   ```bash
-   curl https://get.volta.sh | bash
-   ```
+### 4. Install additional tools
 
-6. Install Rust:
-   ```bash
-   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-   ```
+```bash
+# Homebrew (Linux)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Volta
+curl https://get.volta.sh | bash
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+## Repository Structure
+
+This repo uses chezmoi's naming convention where dotfiles are stored with a `dot_` prefix:
+
+| Source (this repo) | Target (home directory) |
+|---|---|
+| `dot_config/` | `~/.config/` |
+| `dot_claude/` | `~/.claude/` |
+| `dot_agents/` | `~/.agents/` |
+
+This avoids hidden files in the source tree and prevents conflicts with chezmoi's own configuration files.
 
 ## Features
-
-### Fish Shell
-- Custom color scheme
-- Integration with package managers
-- Enhanced shell experience
 
 ### Neovim (LazyVim)
 - Multiple themes (GitHub, Catppuccin, Tokyo Night, Gruvbox)
@@ -106,34 +107,53 @@ This repository contains my personal development environment configurations:
 - GitHub Dark Default theme
 
 ### Claude Code
-- **Hooks**: Git safety, commit validation, file protection, package manager enforcement, lint checks
-- **Agents**: Refactoring, documentation, error handling, workflow orchestration, multi-agent coordination
+- **Hooks**: Git safety, commit validation, file protection, package manager enforcement
 - **Plugins**: LSP integrations (Go, TypeScript, Rust), superpowers, commit-commands, context7, frontend-design
 - **Status Line**: Custom visual feedback via ccstatusline
+- **Skills**: AI agent skills via `.agents/skills/`
 - **Installation**: Automated via Taskfile (`task cc:setup`)
 
 ## Updating
 
-1. Pull the latest changes:
-   ```bash
-   cd ~/.dotfiles
-   git pull
-   ```
+### Update dotfiles
 
-2. Update Neovim plugins:
-   ```bash
-   nvim --headless "+Lazy! sync" +qa
-   ```
+```bash
+# Pull latest changes and apply
+chezmoi update
+
+# Or manually:
+chezmoi git pull
+chezmoi apply
+```
+
+### Update Neovim plugins
+
+```bash
+nvim --headless "+Lazy! sync" +qa
+```
 
 ## Customization
 
-Each tool's configuration can be customized by editing the respective configuration files:
+Edit files directly with chezmoi:
 
-- Fish: `~/.config/fish/config.fish`
-- Neovim: `~/.config/nvim/lua/config/*.lua`
-- WezTerm: `~/.config/wezterm/wezterm.lua`
-- Zed: `~/.config/zed/settings.json`
-- Claude Code: `~/.claude/settings.json`, `~/.claude/hooks/`, `~/.claude/agents/`
+```bash
+chezmoi edit ~/.config/nvim/lua/config/options.lua
+chezmoi edit ~/.claude/settings.json
+```
+
+After editing, apply changes:
+
+```bash
+chezmoi apply
+```
+
+Or commit and push back to the repo:
+
+```bash
+chezmoi git add .
+chezmoi git commit -m "your message"
+chezmoi git push
+```
 
 ## License
 

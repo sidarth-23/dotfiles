@@ -1,0 +1,82 @@
+{
+  "env": {
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-6",
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "model": "opusplan",
+  "permissions": {
+    "allow": [
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sort:*)",
+      "Bash(grep:*)",
+      "Bash(tr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git tag:*)",
+      "Skill(superpowers:*)",
+      "mcp__serena__*",
+      "mcp__context7__*"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/clean_commit_message.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/git_safety_checks.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/docker_validator.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/js_package_manager_command.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/dangerous_file_edit.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": []
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "commit-commands@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "skipDangerousModePermissionPrompt": true
+}
