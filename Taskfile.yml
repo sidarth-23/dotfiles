@@ -1,14 +1,24 @@
 version: '3'
 
 tasks:
+  # --- Homebrew ---
+  brew:install:
+    desc: Install Homebrew if missing
+    platforms: [linux, darwin]
+    cmds:
+      - |
+        if ! command -v brew >/dev/null 2>&1; then
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+
+  # --- Claude Code ---
   cc:install:
-    desc: Install Claude Code CLI (native installer)
+    desc: Install Claude Code CLI
     cmds:
       - |
         case "$(uname -s)" in
-          Linux*)  curl -fsSL https://claude.ai/install.sh | sh ;;
-          Darwin*) curl -fsSL https://claude.ai/install.sh | sh ;;
-          *)       echo "Unsupported OS"; exit 1 ;;
+          Linux*|Darwin*) curl -fsSL https://claude.ai/install.sh | sh ;;
+          *) echo "Claude Code: unsupported OS"; exit 1 ;;
         esac
 
   cc:marketplaces:
@@ -31,7 +41,147 @@ tasks:
       - claude /install-plugin rust-analyzer-lsp@claude-plugins-official
 
   cc:setup:
-    desc: Full Claude Code setup (install + marketplaces + plugins)
+    desc: Full Claude Code setup
     cmds:
       - task: cc:install
       - task: cc:plugins
+
+  # --- OpenCode ---
+  opencode:install:
+    desc: Install OpenCode CLI
+    platforms: [linux, darwin]
+    deps: [brew:install]
+    cmds:
+      - brew install anomalyco/tap/opencode
+
+  opencode:install:win:
+    desc: Install OpenCode CLI (Windows)
+    platforms: [windows]
+    cmds:
+      - npm i -g opencode-ai
+
+  # --- Codex ---
+  codex:install:
+    desc: Install OpenAI Codex CLI
+    platforms: [linux, darwin]
+    deps: [brew:install]
+    cmds:
+      - brew install --cask codex
+
+  codex:install:win:
+    desc: Install OpenAI Codex CLI (Windows)
+    platforms: [windows]
+    cmds:
+      - npm i -g @openai/codex
+
+  # --- Zed ---
+  zed:install:
+    desc: Install Zed editor
+    platforms: [linux, darwin]
+    deps: [brew:install]
+    cmds:
+      - brew install --cask zed
+
+  zed:install:win:
+    desc: Install Zed editor (Windows)
+    platforms: [windows]
+    cmds:
+      - winget install -e --id ZedIndustries.Zed
+
+  # --- VSCode ---
+  vscode:install:
+    desc: Install VSCode
+    platforms: [linux, darwin]
+    deps: [brew:install]
+    cmds:
+      - brew install --cask visual-studio-code
+
+  vscode:install:win:
+    desc: Install VSCode (Windows)
+    platforms: [windows]
+    cmds:
+      - winget install -e --id Microsoft.VisualStudioCode
+
+  # --- Volta ---
+  volta:install:
+    desc: Install Volta
+    platforms: [linux, darwin]
+    cmds:
+      - curl https://get.volta.sh | bash
+
+  volta:install:win:
+    desc: Install Volta (Windows)
+    platforms: [windows]
+    cmds:
+      - winget install Volta.Volta
+
+  # --- Node ---
+  node:install:
+    desc: Install latest Node.js via Volta
+    platforms: [linux, darwin]
+    deps: [volta:install]
+    cmds:
+      - |
+        export VOLTA_HOME="$HOME/.volta"
+        export PATH="$VOLTA_HOME/bin:$PATH"
+        volta install node
+
+  node:install:win:
+    desc: Install latest Node.js via Volta (Windows)
+    platforms: [windows]
+    deps: [volta:install:win]
+    cmds:
+      - volta install node
+
+  # --- pnpm ---
+  pnpm:install:
+    desc: Install pnpm via Volta
+    platforms: [linux, darwin]
+    deps: [volta:install]
+    cmds:
+      - |
+        export VOLTA_HOME="$HOME/.volta"
+        export PATH="$VOLTA_HOME/bin:$PATH"
+        VOLTA_FEATURE_PNPM=1 volta install pnpm
+
+  pnpm:install:win:
+    desc: Install pnpm via Volta (Windows)
+    platforms: [windows]
+    deps: [volta:install:win]
+    cmds:
+      - set VOLTA_FEATURE_PNPM=1 && volta install pnpm
+
+  # --- Bun ---
+  bun:install:
+    desc: Install Bun
+    platforms: [linux, darwin]
+    cmds:
+      - curl -fsSL https://bun.sh/install | bash
+
+  bun:install:win:
+    desc: Install Bun (Windows)
+    platforms: [windows]
+    cmds:
+      - powershell -c "irm bun.sh/install.ps1 | iex"
+
+  # --- Main setup ---
+  setup:
+    desc: Install OpenCode, Claude Code, Codex, Zed, VSCode, Volta, Node, pnpm, and Bun
+    deps:
+      - cc:setup
+      - opencode:install
+      - opencode:install:win
+      - codex:install
+      - codex:install:win
+      - zed:install
+      - zed:install:win
+      - vscode:install
+      - vscode:install:win
+      - volta:install
+      - volta:install:win
+      - node:install
+      - node:install:win
+      - pnpm:install
+      - pnpm:install:win
+      - bun:install
+      - bun:install:win
