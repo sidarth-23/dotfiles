@@ -1,16 +1,6 @@
 version: '3'
 
 tasks:
-  # --- Homebrew ---
-  brew:install:
-    desc: Install Homebrew if missing
-    platforms: [linux, darwin]
-    cmds:
-      - |
-        if ! command -v brew >/dev/null 2>&1; then
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        fi
-
   # --- Claude Code ---
   cc:install:
     desc: Install Claude Code CLI
@@ -50,7 +40,6 @@ tasks:
   opencode:install:
     desc: Install OpenCode CLI
     platforms: [linux, darwin]
-    deps: [brew:install]
     cmds:
       - brew install anomalyco/tap/opencode
 
@@ -64,7 +53,6 @@ tasks:
   codex:install:
     desc: Install OpenAI Codex CLI
     platforms: [linux, darwin]
-    deps: [brew:install]
     cmds:
       - brew install --cask codex
 
@@ -78,7 +66,6 @@ tasks:
   zed:install:
     desc: Install Zed editor
     platforms: [linux, darwin]
-    deps: [brew:install]
     cmds:
       - brew install --cask zed
 
@@ -92,7 +79,6 @@ tasks:
   vscode:install:
     desc: Install VSCode
     platforms: [linux, darwin]
-    deps: [brew:install]
     cmds:
       - brew install --cask visual-studio-code
 
@@ -164,9 +150,22 @@ tasks:
     cmds:
       - powershell -c "irm bun.sh/install.ps1 | iex"
 
+  # --- Rust ---
+  rust:install:
+    desc: Install Rust via rustup
+    platforms: [linux, darwin]
+    cmds:
+      - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+  rust:install:win:
+    desc: Install Rust via rustup (Windows)
+    platforms: [windows]
+    cmds:
+      - powershell -c "irm https://win.rustup.rs | iex"
+
   # --- Main setup ---
   setup:
-    desc: Install OpenCode, Claude Code, Codex, Zed, VSCode, Volta, Node, pnpm, and Bun
+    desc: Install OpenCode, Claude Code, Codex, Zed, VSCode, Volta, Node, pnpm, Bun, and Rust
     deps:
       - cc:setup
       - opencode:install
@@ -185,3 +184,5 @@ tasks:
       - pnpm:install:win
       - bun:install
       - bun:install:win
+      - rust:install
+      - rust:install:win

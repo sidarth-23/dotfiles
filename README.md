@@ -14,61 +14,52 @@ This repository contains my personal development environment configurations:
 
 ## Prerequisites
 
-- [chezmoi](https://www.chezmoi.io/install/)
-- Neovim (>= 0.9.0)
-- WezTerm
-- Zed Editor
-- Task (go-task)
 - Git
-- Homebrew (for Linux)
-- Volta (Node.js version manager)
-- Rust/Cargo
+- A Unix-like shell (bash/zsh/fish)
 
 ## Installation
 
-### 1. Install chezmoi
+### Quick Start (Recommended)
+
+Run the included setup script. It installs chezmoi, applies dotfiles, installs Homebrew, installs Task, and then runs the full Taskfile:
 
 ```bash
-# macOS / Linux
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
+curl -fsSL https://raw.githubusercontent.com/sidarth-23/dotfiles/main/install.sh | bash
+```
 
-# Or via Homebrew
+Or, if you already have the repo cloned:
+
+```bash
+bash install.sh
+```
+
+### What the script does
+
+1. Installs chezmoi (via Homebrew if available, otherwise binary)
+2. Initializes chezmoi with this repo and applies all dotfiles
+3. Installs Homebrew (Linux/macOS)
+4. Installs Task (go-task)
+5. Runs `task setup` to install all development tools
+
+### Manual Setup
+
+If you prefer to do it manually:
+
+```bash
+# 1. Install chezmoi
 brew install chezmoi
-```
 
-### 2. Initialize chezmoi with this repo
-
-```bash
+# 2. Initialize and apply dotfiles
 chezmoi init --apply https://github.com/sidarth-23/dotfiles.git
-```
 
-This will clone the repo into `~/.local/share/chezmoi` and immediately apply all dotfiles to your home directory.
-
-### 3. Install Claude Code and plugins
-
-```bash
-# Full setup (install Claude Code + marketplaces + plugins)
-task cc:setup
-
-# Or install individually:
-task cc:install        # Install Claude Code CLI only
-task cc:marketplaces   # Install marketplaces only
-task cc:plugins        # Install plugins only
-```
-
-**Note:** Due to a Claude bug with `~` paths in plugin configuration files, plugins must be installed via CLI commands rather than copying plugin JSON files.
-
-### 4. Install additional tools
-
-```bash
-# Homebrew (Linux)
+# 3. Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Volta
-curl https://get.volta.sh | bash
+# 4. Install Task
+curl -fsSL https://taskfile.dev/install.sh | sh
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# 5. Run full setup
+task setup
 ```
 
 ## Repository Structure
